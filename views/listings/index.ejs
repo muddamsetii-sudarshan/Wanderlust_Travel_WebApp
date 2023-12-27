@@ -1,0 +1,170 @@
+<%- layout('/layouts/boilerplate') %>
+<style>
+    .aboveIndex{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    #filters{
+        margin-top: 0.75rem;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        
+    }
+    
+    .filter p{
+        font-size: 0.8rem;
+    }
+    .filter:hover{
+        opacity: 1;
+        cursor: pointer;
+    }
+    .toggle-tax{
+        border: 0.3px solid grey;
+        border-radius: 1rem;
+        height:3rem;
+        padding: 1rem;
+        display: none;
+        align-items: center;
+    }
+    
+    .tax-info{
+        display: none;
+    }
+    .toggle-content{
+        font-size: 0.8rem;
+    }
+    .btn{
+        border:none;
+        text-align: center;
+        opacity: 0.7;
+        margin-right: 1rem;
+    }
+    .btn.active{
+        opacity: 1;
+        color: black;
+        border-bottom: 3px solid black;
+        border-radius: none;
+    }
+    .btn:hover{
+        opacity: 1;
+    }
+    .show{
+        display: block !important;
+    }
+    .filterdiv{
+        display: none;
+    }
+
+</style>
+<body>
+    <div class="aboveIndex">
+    <div id="filters">
+            <button class="btn active" onclick="filterSelection('all')"><div><i class="fa-solid fa-list"></i></div><p>All</p></button></button>
+            <button class="btn f" disabled><div><i class="fa-solid fa-fire"></i></div><p>Trending</p></button>    
+            <button class="btn" onclick="filterSelection('Rooms')"><div><i class="fa-solid fa-bed"></i></div><p>Rooms</p></button>
+            <button class="btn c" disabled><div><i class="fa-solid fa-mountain-city"></i></div><p>Iconic cities</p></button>            
+            <button class="btn" onclick="filterSelection('Mountains')"><div><i class="fa-solid fa-mountain"></i></div><p>Mountains</p></button>
+            <button class="btn a" disabled><div><i class="fa-brands fa-fort-awesome"></i></div><p>Castles</p></button>
+            <button class="btn" onclick="filterSelection('Pools')"><div><i class="fa-solid fa-person-swimming"></i></div><p>Amazing pools</p></button>
+            <button class="btn c" disabled><div><i class="fa-solid fa-cow"></i></div><p>Farms</p></button>
+            <button class="btn ca" disabled><div><i class="fa-solid fa-campground"></i></div><p>Camping</p></button>
+    </div>
+    <div class="toggle-tax">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label toggle-content" for="flexSwitchCheckDefault">Display total after taxes</label>
+          </div>
+    </div>
+</div>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+    <%for (listing of allListings){%>
+            <div class="filterdiv <%=listing.category%>">
+        <a href="/listings/<%=listing._id%>">
+    <div class="card listing-card">
+        <img src="<%=listing.image.url%>" class="card-img-top" alt="listing img" style="height: 20rem;">
+        <div class="card-img-overlay"></div>
+        <div class="card-body">
+          <p class="card-text"><b><%=listing.title%></b><br>&#x20B9;<%=listing.price.toLocaleString("en-IN")%>/Night<i class="tax-info">&nbsp; &nbsp;&nbsp;+16%GST</i></p>
+          
+        </div>
+      </div>
+    </a>
+</div>
+    <%}%>
+</div>
+
+    <!-- <ul>
+    <%for (listing of allListings){%>
+        <li><a href="/listings/<%=listing._id%>"><%=listing.title%></a></li>   
+    <%}%>
+    </ul> -->
+    </body>
+    <script>
+        filterSelection("all");
+        function filterSelection(c){
+            if(c=="all") c=""
+            let x=document.getElementsByClassName("filterdiv");
+            
+            for(let i=0;i<x.length;i++){
+                removeShowClass(x[i],"show");
+                if(x[i].className.indexOf(c) > -1) addShowClass(x[i],"show");
+            }
+        }
+
+        // Show filtered elements
+function addShowClass(element, name) {
+    // console.log(name);
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {
+      element.className += " " + arr2[i];
+    }
+  }
+}
+
+// Hide elements that are not selected
+function removeShowClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+
+
+
+        let taxswich=document.getElementById("flexSwitchCheckDefault");
+        taxswich.addEventListener("click",()=>{
+            let taxinfo=document.getElementsByClassName("tax-info");
+            for(info of taxinfo){
+                if(info.style.display!="inline"){
+                    info.style.display="inline";
+                }else{
+                    info.style.display="none"
+                }
+            }
+        })
+        
+        let filter=document.getElementById("filters");
+        let btns=filter.getElementsByClassName("btn");
+        for(let i=0;i<btns.length;i++){
+            btns[i].addEventListener("click",function(){
+                let current=document.getElementsByClassName("active");
+                current[0].className=current[0].className.replace(" active","");
+                this.className +=" active";
+            })
+            
+        }
+        
+        
+    </script>

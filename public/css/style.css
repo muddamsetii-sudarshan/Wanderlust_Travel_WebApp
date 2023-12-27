@@ -1,0 +1,131 @@
+body{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container{
+    flex:1;
+}
+.navbar{
+min-height: 5rem;
+background-color: white;
+}
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+.nav-link{
+    color:#222222 !important;
+}
+
+/* footer styling */
+.fa-info:before{
+    display: none;
+}
+.fa-info{
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 6rem;
+    background-color: #ebebeb;
+}
+.fa-socials, .fa-brand, .fa-links{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fa-socials i{
+    margin-left: 1.5rem;
+    font-size: 1.3rem;
+}
+.fa-links a{
+    text-decoration: none;
+    color: #222222;
+    margin-left: 1.5rem;
+}
+.fa-links a:hover{
+    text-decoration: underline;
+}
+
+/* card */
+.listing-card{
+    border:none !important;
+    margin-bottom: 2rem;
+}
+.card img{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+.card-body{
+    padding: 0 !important;
+}
+.row a{
+    text-decoration: none;
+}
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+/* create */
+.addbutton{
+    background-color: #fe424d ;
+    border: none;
+}
+/* edit */
+.edit-btn{
+    background-color: #fe424d ;
+    border: none;
+}
+
+/* show page */
+.show-img{
+    height: 30vh;
+}
+.btns{
+    display: flex;
+}
+
+/* star reviews */
+.checked{
+    color: orange;
+}
+/* map */
+
+    #map { 
+        height: 50vh;
+        width: 80%;
+     }
+
+/* navbar      */
+.nav a:hover{
+    border: 1px solid black;
+    border-radius: 7px;
+    box-shadow: 0.1rem 0.2rem grey;
+}
+
+@media(min-width:992px){
+    .toggle-tax{
+        display: flex !important;
+    }
+}
+@media(max-width:660px){
+    .btn.f{
+        display: none;
+    }
+    .btn.c{
+        display: none;
+    }
+    .btn.a{
+        display: none;
+    }
+    .btn.ca{
+        display: none;
+    }
+}
